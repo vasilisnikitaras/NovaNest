@@ -1,3 +1,4 @@
+<!-- 🔧 ΟΛΟΚΛΗΡΟΣ ΚΩΔΙΚΑΣ tools.html -->
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -6,35 +7,31 @@
   <title>Tools - NovaNest</title>
   <style>
     :root {
-      --bg: #ffffff;
+      --bg: #fff;
       --text: #1a1a1a;
       --accent: #0055aa;
-      --button-bg: #eeeeee;
+      --button-bg: #eee;
       --button-text: #111;
     }
-
     [data-theme="dark"] {
       --bg: #121212;
-      --text: #eeeeee;
+      --text: #eee;
       --accent: #00ffff;
       --button-bg: #333;
       --button-text: #fff;
     }
-
     body {
       margin: 0;
       font-family: sans-serif;
       background: var(--bg);
       color: var(--text);
     }
-
     header {
       background: var(--accent);
       color: white;
       text-align: center;
       padding: 1rem;
     }
-
     nav {
       display: flex;
       justify-content: center;
@@ -42,7 +39,6 @@
       flex-wrap: wrap;
       margin-top: 1rem;
     }
-
     nav a, nav button {
       background: var(--button-bg);
       color: var(--button-text);
@@ -52,21 +48,69 @@
       text-decoration: none;
       cursor: pointer;
     }
-
     section {
-      max-width: 800px;
+      max-width: 1000px;
       margin: auto;
       padding: 2rem;
     }
-
     .tool-box {
       background: var(--button-bg);
       color: var(--button-text);
       padding: 1rem;
       border-radius: 6px;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
     }
-
+    .novagrid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .novacard {
+      background: var(--button-bg);
+      color: var(--button-text);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      max-width: 300px;
+      flex: 1 1 300px;
+    }
+    .novacard:hover {
+      transform: scale(1.03);
+    }
+    .novacard img {
+      width: 100%;
+      height: auto;
+    }
+    .novacard .content {
+      padding: 1rem;
+    }
+    .novacard .content a {
+      display: inline-block;
+      margin-top: 0.5rem;
+      background: var(--accent);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      text-decoration: none;
+    }
+    .novaloader {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .spinner {
+      border: 6px solid var(--button-bg);
+      border-top: 6px solid var(--accent);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
     .back-to-top {
       position: fixed;
       bottom: 1rem;
@@ -92,14 +136,44 @@
   <section>
     <h2>🧱 UI Tools and Components</h2>
     <div class="tool-box">
-      <p>Here you'll find small reusable components, previews, and snippets that empower faster development and cleaner design.</p>
+      <p>Reusable elements built for devs & creatives. Copy, remix, or simply explore the NovaNest ecosystem.</p>
       <ul>
-        <li>✅ Simple Cards</li>
-        <li>✅ Gallery Layouts</li>
-        <li>✅ Micro Loaders</li>
-        <li>✅ CSS Button Animations</li>
+        <li>✅ Responsive NovaCards</li>
+        <li>✅ CSS-only Loaders</li>
+        <li>☕ Optional support links</li>
       </ul>
-      <p>More to come...</p>
+    </div>
+
+    <div class="tool-box">
+      <h3>🧩 NovaCard Grid</h3>
+      <div class="novagrid">
+        <div class="novacard">
+          <img src="https://via.placeholder.com/300x150" alt="Card Image" />
+          <div class="content">
+            <h4>Card One</h4>
+            <p>Clean layout with hover effects and CTA.</p>
+            <a href="#">Copy Code</a>
+          </div>
+        </div>
+        <div class="novacard">
+          <img src="https://via.placeholder.com/300x150" alt="Card Image" />
+          <div class="content">
+            <h4>Card Two</h4>
+            <p>Perfect for portfolio or featured content.</p>
+            <a href="#">Download</a>
+          </div>
+        </div>
+      </div>
+      <p style="text-align:center; margin-top:1rem;">
+        <a href="https://buymeacoffee.com/vasilis" target="_blank">☕ Support This Tool</a>
+      </p>
+    </div>
+
+    <div class="tool-box">
+      <h3>🌀 NovaLoader</h3>
+      <div class="novaloader">
+        <div class="spinner"></div>
+      </div>
     </div>
   </section>
 
