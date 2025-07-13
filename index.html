@@ -1,155 +1,173 @@
 <!--New version of index.html with full theme responsiveness and multilingual layout -->
-
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NovaNest</title>
   <style>
     :root {
-      --card-bg: #f4f4f4;
-      --card-text: #003366;
-      --modal-bg: #eaeaea;
-      --modal-text: #111;
-      --header-bg: #f4f4f4;
-      --header-text: #003366;
-      --nav-button-bg: #ddd;
-      --nav-button-text: #111;
+      --bg: #f8f8f8;
+      --text: #222;
+      --accent: #003366;
+      --button-bg: #ddd;
+      --button-text: #111;
     }
-
     [data-theme="dark"] {
-      --card-bg: #222;
-      --card-text: #00ffff;
-      --modal-bg: #111;
-      --modal-text: #fff;
-      --header-bg: #111;
-      --header-text: white;
-      --nav-button-bg: #333;
-      --nav-button-text: white;
+      --bg: #121212;
+      --text: #eee;
+      --accent: #00ffff;
+      --button-bg: #333;
+      --button-text: #fff;
     }
 
     body {
       margin: 0;
       font-family: sans-serif;
-      background: var(--card-bg);
-      color: var(--card-text);
+      background: var(--bg);
+      color: var(--text);
     }
 
     header {
-      background-color: var(--header-bg);
-      color: var(--header-text);
-      padding: 1rem;
+      background: var(--accent);
+      color: white;
       text-align: center;
+      padding: 1rem;
     }
 
     nav {
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       gap: 1rem;
-      margin: 1rem;
+      margin-top: 1rem;
     }
 
-    nav a, nav button, nav select {
-      background: var(--nav-button-bg);
-      color: var(--nav-button-text);
+    nav button, nav select {
+      background: var(--button-bg);
+      color: var(--button-text);
       border: none;
       padding: 0.5rem 1rem;
+      border-radius: 4px;
       cursor: pointer;
     }
 
-    .feature-card {
-      background-color: var(--card-bg);
-      color: var(--card-text);
-      padding: 1rem;
-      margin: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    section {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
     }
 
-    .modal {
-      display: none;
-      position: fixed;
-      top: 20%;
-      left: 50%;
-      transform: translate(-50%, -20%);
-      background: var(--modal-bg);
-      color: var(--modal-text);
-      padding: 2rem;
-      border-radius: 8px;
-      z-index: 1000;
+    .feature {
+      background: var(--button-bg);
+      color: var(--button-text);
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 6px;
     }
 
     .back-to-top {
       position: fixed;
       bottom: 1rem;
       right: 1rem;
-      background: var(--nav-button-bg);
-      color: var(--nav-button-text);
+      background: var(--accent);
+      color: white;
       padding: 0.5rem;
+      border: none;
+      border-radius: 50%;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
-
   <header>
     <h1>NovaNest</h1>
     <nav>
-      <a href="#about">About</a>
-      <a href="#features">Features</a>
-      <a href="#contact">Contact</a>
-      <select id="language-selector" onchange="changeLang(this.value)">
+      <button onclick="toggleTheme()">Toggle Theme 🌓</button>
+      <select onchange="setLanguage(this.value)">
         <option value="en">English</option>
         <option value="el">Ελληνικά</option>
         <option value="fr">Français</option>
       </select>
-      <button onclick="toggleTheme()">🌓</button>
     </nav>
   </header>
 
   <section id="about">
-    <h2>Welcome to NovaNest!</h2>
-    <p>Where design meets speed. Let's build something amazing.</p>
+    <h2 id="title">Welcome to NovaNest!</h2>
+    <p id="intro">Where design meets speed. Let's build something amazing.</p>
   </section>
 
   <section id="features">
-    <div class="feature-card" onclick="openModal('modal1')">⚡ Fast Performance</div>
-    <div class="feature-card" onclick="openModal('modal2')">🧠 Smart UI</div>
-    <div class="feature-card" onclick="openModal('modal3')">🎨 Modern Design</div>
-    <div id="modal1" class="modal">Fast loading and optimized structure for all devices.</div>
-    <div id="modal2" class="modal">Intelligent and adaptable user interface design.</div>
-    <div id="modal3" class="modal">Elegant layouts with multilingual support.</div>
+    <h3 id="features-title">Features</h3>
+    <div class="feature" id="feature1">⚡ Fast Performance</div>
+    <div class="feature" id="feature2">🧠 Smart UI</div>
+    <div class="feature" id="feature3">🎨 Modern Design</div>
   </section>
 
   <section id="contact">
-    <h2>Contact Us</h2>
-    <p>Email: <a href="mailto:vasilis.nikitaras@gmail.com">vasilis.nikitaras@gmail.com</a></p>
-    <p>GitHub: <a href="https://github.com/VasilisNikitaras" target="_blank">github.com/VasilisNikitaras</a></p>
+    <h3 id="contact-title">Contact</h3>
+    <p id="email">Email: <a href="mailto:vasilis.nikitaras@gmail.com">vasilis.nikitaras@gmail.com</a></p>
+    <p id="github">GitHub: <a href="https://github.com/VasilisNikitaras" target="_blank">github.com/VasilisNikitaras</a></p>
   </section>
 
-  <button class="back-to-top" onclick="scrollToTop()">↑ Top</button>
+  <button class="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
 
   <script>
     function toggleTheme() {
-      const body = document.body;
-      const current = body.getAttribute("data-theme");
-      body.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+      const html = document.documentElement;
+      const current = html.getAttribute("data-theme");
+      html.setAttribute("data-theme", current === "dark" ? "light" : "dark");
     }
 
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    const translations = {
+      en: {
+        title: "Welcome to NovaNest!",
+        intro: "Where design meets speed. Let's build something amazing.",
+        featuresTitle: "Features",
+        feature1: "⚡ Fast Performance",
+        feature2: "🧠 Smart UI",
+        feature3: "🎨 Modern Design",
+        contactTitle: "Contact",
+        email: "Email: ",
+        github: "GitHub: ",
+      },
+      el: {
+        title: "Καλώς ήρθατε στο NovaNest!",
+        intro: "Εκεί που η σχεδίαση συναντά την ταχύτητα. Δημιούργησε κάτι εκπληκτικό.",
+        featuresTitle: "Δυνατότητες",
+        feature1: "⚡ Γρήγορη Απόδοση",
+        feature2: "🧠 Έξυπνο UI",
+        feature3: "🎨 Μοντέρνος Σχεδιασμός",
+        contactTitle: "Επικοινωνία",
+        email: "Email: ",
+        github: "GitHub: ",
+      },
+      fr: {
+        title: "Bienvenue chez NovaNest!",
+        intro: "Là où le design rencontre la vitesse. Construisons quelque chose d’incroyable.",
+        featuresTitle: "Fonctionnalités",
+        feature1: "⚡ Performance rapide",
+        feature2: "🧠 UI intelligent",
+        feature3: "🎨 Design moderne",
+        contactTitle: "Contact",
+        email: "Email: ",
+        github: "GitHub: ",
+      }
+    };
 
-    function openModal(id) {
-      document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
-    }
-
-    function changeLang(lang) {
-      // Placeholder for language switching logic
-      alert("Language switched to: " + lang);
+    function setLanguage(lang) {
+      const t = translations[lang];
+      document.getElementById("title").textContent = t.title;
+      document.getElementById("intro").textContent = t.intro;
+      document.getElementById("features-title").textContent = t.featuresTitle;
+      document.getElementById("feature1").textContent = t.feature1;
+      document.getElementById("feature2").textContent = t.feature2;
+      document.getElementById("feature3").textContent = t.feature3;
+      document.getElementById("contact-title").textContent = t.contactTitle;
+      document.getElementById("email").firstChild.textContent = t.email;
+      document.getElementById("github").firstChild.textContent = t.github;
     }
   </script>
 </body>
 </html>
+
