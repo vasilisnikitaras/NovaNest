@@ -20,6 +20,26 @@ Designed for speed, interactivity, and modern UI principles.
 
 ---
 
+## 📸 Interface Previews
+🇫🇷 Français
+Les images suivantes illustrent l’apparence de NovaNest selon les différents thèmes.
+
+🇬🇧 English
+The following images showcase NovaNest’s appearance under different theme settings.
+
+GR Οι παρακάτω εικόνες δείχνουν την εμφάνιση του NovaNest σε διαφορετικά themes.
+
+### 🌗 Dark Mode Preview
+
+![NovaNest Dark](assets/nova_preview_dark.jpeg)
+
+### ☀️ Light Mode Preview
+
+![NovaNest Light](assets/nova_preview_light.jpeg)
+
+
+
+
 ## 🌟 Features / Δυνατότητες
 
 - 🌍 Multilingual (English, Greek, French)
