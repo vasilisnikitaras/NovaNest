@@ -140,6 +140,40 @@
       }
     }
   </style>
+  
+<style>
+:root {
+  --card-bg: #f4f4f4;
+  --card-text: #003366;
+  --modal-bg: #eaeaea;
+  --modal-text: #111;
+}
+
+[data-theme="dark"] {
+  --card-bg: #222;
+  --card-text: #00ffff;
+  --modal-bg: #111;
+  --modal-text: #fff;
+}
+  </style>
+  
+<style>
+  .feature-card {
+  background-color: var(--card-bg);
+  color: var(--card-text);
+  ...
+}
+
+.modal {
+  background-color: var(--modal-bg);
+  color: var(--modal-text);
+  ...
+}
+
+  </style>
+
+
+
 </head>
 <body data-theme="light">
   <header>
