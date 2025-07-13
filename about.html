@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About - NovaNest</title>
+  <style>
+    :root {
+      --bg: #f8f8f8;
+      --text: #222;
+      --accent: #003366;
+      --button-bg: #ddd;
+      --button-text: #111;
+    }
+    [data-theme="dark"] {
+      --bg: #121212;
+      --text: #eee;
+      --accent: #00ffff;
+      --button-bg: #333;
+      --button-text: #fff;
+    }
+
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      background: var(--accent);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    nav a, nav button {
+      background: var(--button-bg);
+      color: var(--button-text);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    section {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      background: var(--accent);
+      color: white;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      background: var(--accent);
+      color: white;
+      padding: 0.5rem;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>About NovaNest</h1>
+    <nav>
+      <a href="index.html">← Back to Home</a>
+      <button onclick="toggleTheme()">Toggle Theme 🌗</button>
+    </nav>
+  </header>
+
+  <section>
+    <h2>Our Vision</h2>
+    <p>NovaNest is built for speed, clarity and impact. It’s a project that focuses on modern web principles while remaining accessible, multilingual, and fully responsive.</p>
+
+    <h2>Our Purpose</h2>
+    <p>We created NovaNest together to deliver seamless interface experiences across platforms. From feature modals to layout transitions, everything reflects a balanced and professional approach.</p>
+
+    <h2>Our Values</h2>
+    <ul>
+      <li>⚡ Performance-first mindset</li>
+      <li>🎯 User-centric design</li>
+      <li>🌍 Multilingual accessibility</li>
+    </ul>
+  </section>
+
+  <button class="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+  <footer>
+    <p>© 2025 NovaNest. Crafted in collaboration with <strong>Vasilis Nikitaras</strong>. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute("data-theme");
+      html.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+    }
+  </script>
+</body>
+</html>
