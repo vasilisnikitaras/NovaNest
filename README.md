@@ -55,6 +55,25 @@ GR Οι παρακάτω εικόνες δείχνουν την εμφάνιση
 - ⬆️ Smooth Back-to-Top button
 
 ---
+## 🚀 Features
+
+...
+
+## 🧰 NovaNest Components
+
+Explore ready-to-use UI tools built with 💡 and consistency.
+
+| Component     | Preview            | Link                                |
+|---------------|--------------------|-------------------------------------|
+| NovaCard Grid | ✅ Responsive Cards | [View Tools](https://vasilisnikitaras.github.io/NovaNest/tools.html) |
+| NovaLoader    | ✅ CSS Spinner      | [View Tools](https://vasilisnikitaras.github.io/NovaNest/tools.html#novaloader) |
+
+> Crafted with ❤️ by Vasilis Nikitaras  
+> ☕ [Buy Me a Coffee](https://buymeacoffee.com/vasilis)
+
+## 🛠️ How to Use
+...
+
 
 ## 🛠️ How to Use / Οδηγίες Χρήσης
 
