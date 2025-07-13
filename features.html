@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Features - NovaNest</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --accent: #0055aa;
+      --button-bg: #eeeeee;
+      --button-text: #111;
+    }
+    [data-theme="dark"] {
+      --bg: #121212;
+      --text: #eeeeee;
+      --accent: #00ffff;
+      --button-bg: #333;
+      --button-text: #fff;
+    }
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    header {
+      background: var(--accent);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    nav a, nav button {
+      background: var(--button-bg);
+      color: var(--button-text);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    section {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+    }
+    .feature-box {
+      background: var(--button-bg);
+      color: var(--button-text);
+      border-radius: 6px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 99;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--bg);
+      border: 2px solid var(--accent);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    .modal.show {
+      display: block;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      background: var(--accent);
+      color: white;
+      padding: 0.5rem;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .mobile-preview {
+      width: 320px;
+      margin: auto;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 1rem;
+      background: var(--button-bg);
+    }
+    input[type="range"] {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>NovaNest - Features</h1>
+    <nav>
+      <a href="index.html">← Back to Home</a>
+      <button onclick="toggleTheme()">Toggle Theme 🌗</button>
+    </nav>
+  </header>
+
+  <section>
+    <h2>🎨 Modal Window</h2>
+    <div class="feature-box">
+      <button onclick="openModal()">Open Modal</button>
+      <div id="modal" class="modal">
+        <p>This is a demo modal window with animation.</p>
+        <button onclick="closeModal()">Close</button>
+      </div>
+    </div>
+
+    <h2>🎚️ Toggle Switch & Slider</h2>
+    <div class="feature-box">
+      <label>
+        <input type="checkbox" onchange="alertToggle(this)"> Enable Option
+      </label>
+      <br><br>
+      <input type="range" min="0" max="100" value="50" oninput="updateSlider(this.value)" />
+      <p>Slider Value: <span id="sliderValue">50</span></p>
+    </div>
+
+    <h2>📱 Mobile Preview</h2>
+    <div class="feature-box mobile-preview">
+      <p><strong>Mobile UI Simulation</strong></p>
+      <p>NovaNest interface fits all screen sizes perfectly.</p>
+    </div>
+
+    <h2>🧠 Micro-Interaction</h2>
+    <div class="feature-box">
+      <button onmouseover="this.innerText='Hovered!'" onmouseout="this.innerText='Hover me!'">Hover me!</button>
+    </div>
+  </section>
+
+  <button class="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+  <footer style="text-align:center; padding:1rem; font-size:0.9rem; background:var(--accent); color:white;">
+    <p>© 2025 NovaNest. Crafted in collaboration with <strong>Vasilis Nikitaras</strong>. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute("data-theme");
+      html.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+    }
+
+    function openModal() {
+      document.getElementById("modal").classList.add("show");
+    }
+
+    function closeModal() {
+      document.getElementById("modal").classList.remove("show");
+    }
+
+    function alertToggle(el) {
+      alert("Toggle switched: " + (el.checked ? "ON" : "OFF"));
+    }
+
+    function updateSlider(val) {
+      document.getElementById("sliderValue").innerText = val;
+    }
+  </script>
+</body>
+</html>
