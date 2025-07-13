@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NovaNest Web App</title>
+  <style>
+    :root {
+      --bg-color: #fff;
+      --text-color: #000;
+      --accent-color: #00ffff;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #000;
+      --text-color: #fff;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #111;
+      padding: 1rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 0.5rem;
+    }
+
+    nav a, nav button, nav select {
+      color: white;
+      background: #333;
+      border: none;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    main {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    section {
+      margin-top: 4rem;
+    }
+
+    .feature-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .feature-card {
+      background-color: #222;
+      color: var(--accent-color);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px var(--accent-color);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      max-width: 200px;
+    }
+
+    .feature-card:hover {
+      transform: scale(1.05);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      padding: 2rem;
+      z-index: 100;
+    }
+
+    .modal p {
+      max-width: 500px;
+      font-size: 1.2rem;
+    }
+
+    .modal button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #444;
+      border: none;
+      color: #00ffff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #top-button {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      padding: 0.7rem 1rem;
+      background-color: var(--accent-color);
+      color: var(--bg-color);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .feature-card {
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body data-theme="light">
+  <header>
+    <h1 id="title">NovaNest</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#contact">Contact</a>
+      <select id="language-selector" onchange="changeLang(this.value)">
+        <option value="en">English</option>
+        <option value="el">Ελληνικά</option>
+        <option value="fr">Français</option>
+      </select>
+      <button onclick="goHome()" id="home-label">Home</button>
+      <button onclick="toggleTheme()">Toggle Theme</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2 id="welcome-text">Welcome to NovaNest!</h2>
+      <p id="description-text">Where design meets speed. Let's build something amazing.</p>
+    </section>
+
+    <section id="features">
+      <h2>Features</h2>
+      <div class="feature-grid">
+        <div class="feature-card" onclick="showModal(0)">⚡ Fast Performance</div>
+        <div class="feature-card" onclick="showModal(1)">🧠 Smart UI</div>
+        <div class="feature-card" onclick="showModal(2)">🎨 Modern Design</div>
+        <div class="feature-card" onclick="showModal(3)">🌐 Multilingual</div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>Email: <a href="mailto:vasilis.nikitaras@gmail.com">vasilis.nikitaras@gmail.com</a></p>
+      <p>GitHub: <a href="https://github.com/VasilisNikitaras" target="_blank">github.com/VasilisNikitaras</a></p>
+    </section>
+  </main>
+
+  <div id="modal" class="modal">
+    <h3 id="modal-title">Feature</h3>
+    <p id="modal-text"></p>
+    <button onclick="closeModal()">Close</button>
+  </div>
+
+  <button id="top-button" onclick="scrollToTop()">↑ Top</button>
+
+  <script>
+    const strings = {
+      en: {
+        title: "NovaNest",
+        welcome: "Welcome to NovaNest!",
+        description: "Where design meets speed. Let's build something amazing.",
+        home: "Home"
+      },
+      el: {
+        title: "NovaNest",
+        welcome: "Καλώς ήρθες στο NovaNest!",
+        description: "Εκεί όπου το design συναντά την ταχύτητα. Ας δημιουργήσουμε κάτι μοναδικό.",
+        home: "Αρχική"
+      },
+      fr: {
+        title: "NovaNest",
+        welcome: "Bienvenue sur NovaNest!",
+        description: "Là où le design rencontre la vitesse. Créons quelque chose d’unique.",
+        home: "Accueil"
+      }
+    };
+
+    function changeLang(lang) {
+      document.getElementById("title").textContent = strings[lang].title;
+      document.getElementById("welcome-text").textContent = strings[lang].welcome;
+      document.getElementById("description-text").textContent = strings[lang].description;
+      document.getElementById("home-label").textContent = strings[lang].home;
+    }
+
+    function toggleTheme() {
+      const body = document.body;
+      const current = body.getAttribute("data-theme");
+      body.setAttribute("data-theme", current === "light" ? "dark" : "light");
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goHome() {
+      location.href = 'index.html';
+    }
+
+    const modalTexts = [
+      "NovaNest delivers blazing speeds with optimized resource loading and lightning-fast performance across platforms.",
+      "Our UI is intelligently designed to adapt to user behavior and reduce friction throughout the experience.",
+      "Clean lines, elegant typography, and customizable visual styles make NovaNest shine on every screen.",
+      "Supports English, Greek, and French out of the box—making your app accessible to a global audience."
+    ];
+
+    function showModal(index) {
+      document.getElementById("modal-title").textContent = document.querySelectorAll(".feature-card")[index].textContent;
+      document.getElementById("modal-text").textContent = modalTexts[index];
+      document.getElementById("modal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+  </script>
+</body>
+</html>
