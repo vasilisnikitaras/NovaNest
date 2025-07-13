@@ -31,11 +31,15 @@ GR Οι παρακάτω εικόνες δείχνουν την εμφάνιση
 
 ### 🌗 Dark Mode Preview
 
-![NovaNest Dark](assets/nova_preview_dark.jpeg)
+## 📸 Screenshot / Στιγμιότυπο
+
+![NovaNest Preview](assets/nova_preview_dark.jpeg)
+
 
 ### ☀️ Light Mode Preview
 
-![NovaNest Light](assets/nova_preview_light.jpeg)
+![NovaNest Preview](assets/nova_preview_light.jpeg)
+
 
 
 
