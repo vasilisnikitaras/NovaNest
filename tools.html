@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tools - NovaNest</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --accent: #0055aa;
+      --button-bg: #eeeeee;
+      --button-text: #111;
+    }
+
+    [data-theme="dark"] {
+      --bg: #121212;
+      --text: #eeeeee;
+      --accent: #00ffff;
+      --button-bg: #333;
+      --button-text: #fff;
+    }
+
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      background: var(--accent);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    nav a, nav button {
+      background: var(--button-bg);
+      color: var(--button-text);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    section {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .tool-box {
+      background: var(--button-bg);
+      color: var(--button-text);
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      background: var(--accent);
+      color: white;
+      padding: 0.5rem;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>NovaNest Tools</h1>
+    <nav>
+      <a href="index.html">← Back to Home</a>
+      <button onclick="toggleTheme()">Toggle Theme 🌗</button>
+    </nav>
+  </header>
+
+  <section>
+    <h2>🧱 UI Tools and Components</h2>
+    <div class="tool-box">
+      <p>Here you'll find small reusable components, previews, and snippets that empower faster development and cleaner design.</p>
+      <ul>
+        <li>✅ Simple Cards</li>
+        <li>✅ Gallery Layouts</li>
+        <li>✅ Micro Loaders</li>
+        <li>✅ CSS Button Animations</li>
+      </ul>
+      <p>More to come...</p>
+    </div>
+  </section>
+
+  <button class="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+  <footer style="text-align:center; padding:1rem; font-size:0.9rem; background:var(--accent); color:white;">
+    <p>© 2025 NovaNest. Crafted in collaboration with <strong>Vasilis Nikitaras</strong>. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute("data-theme");
+      html.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+    }
+  </script>
+</body>
+</html>
