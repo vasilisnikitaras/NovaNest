@@ -1,4 +1,3 @@
-<!-- 🔧 ΟΛΟΚΛΗΡΟΣ ΚΩΔΙΚΑΣ tools.html -->
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -111,6 +110,23 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+    .tool-card {
+      background: var(--button-bg);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .tool-card button {
+      width: 100%;
+      text-align: center;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
     .back-to-top {
       position: fixed;
       bottom: 1rem;
@@ -121,6 +137,19 @@
       border: none;
       border-radius: 50%;
       cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .tool-card {
+        padding: 1rem;
+        font-size: 1rem;
+      }
+      .tool-card h3 {
+        font-size: 1.2rem;
+      }
+      .tool-card button {
+        width: 100%;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -173,6 +202,20 @@
       <h3>🌀 NovaLoader</h3>
       <div class="novaloader">
         <div class="spinner"></div>
+      </div>
+    </div>
+
+    <div class="tool-box">
+      <h3>🎛️ NovaToggle</h3>
+      <div class="tool-card">
+        <p>Simple toggle switch with sleek styling. Plug & play in any UI module.</p>
+        <label style="display: flex; align-items: center; gap: 0.5rem;">
+          <input type="checkbox" id="novaToggle" onchange="document.getElementById('toggleStatus').innerText = this.checked ? 'ON' : 'OFF'" />
+          <span style="font-weight: bold;">Toggle Status: <span id="toggleStatus">OFF</span></span>
+        </label>
+        <button onclick="window.open('https://codepen.io/Vasilis-Nikitaras/pen/YOUR-PEN-ID', '_blank')">
+          🔧 Try It
+        </button>
       </div>
     </div>
   </section>
