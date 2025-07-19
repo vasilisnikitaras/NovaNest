@@ -141,6 +141,15 @@
     <p id="github">GitHub: <a href="https://github.com/VasilisNikitaras" target="_blank">github.com/VasilisNikitaras</a></p>
   </section>
 
+<section id="csv-export">
+  <button onclick="exportToCSV(callData); showCsvHelp();">📤 Export σε CSV</button>
+
+  <div id="csvHelp" style="display: none; margin-top: 20px; background-color: #f2f7f4; padding: 12px; border-left: 4px solid #38d9a9; border-radius: 8px; font-size: 0.9rem;">
+    📄 <strong>Σημαντικό:</strong> Αν χρησιμοποιείς <em>Excel</em>, άνοιξε το αρχείο CSV μέσω <strong>Δεδομένα → Από κείμενο/CSV</strong> και επίλεξε <strong>UTF-8</strong> για σωστή εμφάνιση ελληνικών χαρακτήρων.
+  </div>
+</section>
+
+
   <button class="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
 
   <script>
@@ -203,6 +212,50 @@
 <footer style="text-align:center; padding:1rem; font-size:0.9rem; background:var(--accent); color:white;">
   <p>© 2025 NovaNest. Crafted in collaboration with <strong>Vasilis Nikitaras</strong>. All rights reserved.</p>
 </footer>
+
+<script>
+  function exportToCSV(data) {
+    const headers = ["Caller", "Duration", "Type", "Issue", "Date"];
+    const rows = data.map(row => headers.map(h => `"${row[h]}"`).join(","));
+    const csvContent = "\uFEFF" + [headers.join(","), ...rows].join("\n"); // 👈 BOM για σωστό UTF-8!
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.setAttribute("href", url);
+    link.setAttribute("download", "call_log.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+</script>
+
+  <script>
+    function showCsvHelp() {
+  document.getElementById("csvHelp").style.display = "block";
+}
+
+  </script>
+
+  <script>
+  function showCsvHelp() {
+    const lang = document.querySelector("select").value;
+    let message = "";
+
+    if (lang === "el") {
+      message = "📄 <strong>Σημαντικό:</strong> Αν χρησιμοποιείς <em>Excel</em>, άνοιξε το αρχείο CSV μέσω <strong>Δεδομένα → Από κείμενο/CSV</strong> και επίλεξε <strong>UTF-8</strong> για σωστή εμφάνιση ελληνικών χαρακτήρων.";
+    } else if (lang === "en") {
+      message = "📄 <strong>Note:</strong> If you're using <em>Excel</em>, open the CSV file via <strong>Data → From Text/CSV</strong> and select <strong>UTF-8</strong> to ensure proper display of characters.";
+    } else if (lang === "fr") {
+      message = "📄 <strong>Important :</strong> Si vous utilisez <em>Excel</em>, ouvrez le fichier CSV via <strong>Données → À partir d’un texte/CSV</strong> et sélectionnez <strong>UTF-8</strong> pour afficher correctement les caractères.";
+    }
+
+    const box = document.getElementById("csvHelp");
+    box.innerHTML = message;
+    box.style.display = "block";
+  }
+</script>
 
   
 </body>
