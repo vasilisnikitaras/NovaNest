@@ -1,209 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>📞 Call Logger Demo — NovaNest & VasiVerse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Call Logger Demo</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      padding: 1rem;
-      max-width: 700px;
-      margin: auto;
-      background: var(--bg, #f9f9f9);
-      color: var(--text, #222);
-      transition: all 0.3s ease;
+      margin: 0; font-family: sans-serif;
+      background: var(--bg); color: var(--text);
     }
-    h2 { text-align: center; }
-    label {
-      display: block;
-      margin-top: 1rem;
-      font-weight: bold;
-    }
-    input, textarea, select, button {
-      width: 100%;
-      padding: 0.6rem;
-      margin-bottom: 1rem;
-      border-radius: 6px;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-    }
-    button {
-      background: #0077ff;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover { background: #005fcc; }
-    #confirmationMsg {
-      color: green;
-      font-weight: bold;
-      text-align: center;
-    }
-    table {
-      width: 100%;
-      margin-top: 1rem;
-      border-collapse: collapse;
-    }
-    th, td {
-      border: 1px solid #aaa;
-      padding: 0.5rem;
-      text-align: left;
-    }
-    .dark {
-      --bg: #1e1e1e;
-      --text: #f9f9f9;
-    }
-    footer {
-      margin-top: 2rem;
-      text-align: center;
-      font-size: 0.9rem;
-    }
+    :root { --bg: #f8f8f8; --text: #222; --accent: #003366; }
+    [data-theme="dark"] { --bg: #121212; --text: #eee; --accent: #00ffff; }
+    nav { display: flex; gap: 1rem; padding: 1rem; background: var(--accent); color: white; justify-content: space-between; }
+    button, select { padding: 0.5rem 1rem; border: none; cursor: pointer; border-radius: 4px; }
+    section { padding: 1rem; max-width: 900px; margin: auto; }
+    .tab { display: none; }
+    .active { display: block; }
+    #callTable td, #callTable th { padding: 0.5rem; border: 1px solid #ccc; }
+    #csvHelp { margin-top: 1rem; padding: 1rem; background: #f1fdf8; border-left: 4px solid #38d9a9; display: none; }
   </style>
 </head>
 <body>
 
-  <h2 id="title">Call Logger Demo</h2>
+<nav>
+  <div>
+    <button onclick="toggleTheme()">Toggle Theme 🌗</button>
+    <select onchange="setLanguage(this.value)">
+      <option value="en">English</option>
+      <option value="el">Ελληνικά</option>
+      <option value="fr">Français</option>
+    </select>
+  </div>
+  <div>
+    <button onclick="showTab('log')">📞 Log</button>
+    <button onclick="showTab('stats')">📊 Stats</button>
+    <button onclick="showTab('export')">📤 Export</button>
+  </div>
+</nav>
 
-  <label id="labelName" for="nameInput"></label>
-  <input id="nameInput" />
-
-  <label id="labelPhone" for="phoneInput"></label>
-  <input id="phoneInput" />
-
-  <label id="labelDuration" for="durationInput"></label>
-  <input id="durationInput" />
-
-  <label id="labelIssue" for="issueInput"></label>
-  <textarea id="issueInput"></textarea>
-
-  <button id="logBtn"></button>
-  <p id="confirmationMsg"></p>
-
-  <select id="langSelector">
-    <option value="en">🇬🇧 English</option>
-    <option value="fr">🇫🇷 Français</option>
-    <option value="el">🇬🇷 Ελληνικά</option>
-  </select>
-  <button onclick="toggleDarkMode()">🌗 Toggle Dark Mode</button>
-  <button onclick="downloadLog()">📤 Download Log (.txt)</button>
-
-  <table id="logTable">
-    <thead>
-      <tr>
-        <th>Name</th><th>Phone</th><th>Duration</th><th>Issue</th>
-      </tr>
-    </thead>
+<section id="log" class="tab active">
+  <h2>📞 Call Log</h2>
+  <textarea id="callComment" placeholder="✍️ Add comment..." style="width:100%; margin-bottom:1rem;"></textarea>
+  <table id="callTable" style="width:100%; border-collapse:collapse;">
+    <thead><tr><th>Caller</th><th>Duration</th><th>Type</th><th>Issue</th><th>Date</th><th>Actions</th></tr></thead>
     <tbody></tbody>
   </table>
+</section>
 
-  <footer>
-    <p>Created by Vasileios Nikitaras & Copilot 🤝</p>
-    <small>© 2025 — All Rights Reserved</small>
-  </footer>
+<section id="stats" class="tab">
+  <h2>📊 Stats</h2>
+  <canvas id="callChart" width="400" height="200"></canvas>
+</section>
 
-  <script>
-    const translations = {
-      en: {
-        title: "Call Logger Demo",
-        labels: {
-          name: "Caller Name or Number",
-          phone: "Phone Number",
-          duration: "Duration (minutes)",
-          issue: "Problem Description"
-        },
-        button: "Log Call",
-        confirmation: "📞 Call from ",
-        logged: " successfully logged!"
-      },
-      fr: {
-        title: "Démo d'enregistreur d'appel",
-        labels: {
-          name: "Nom ou numéro d'appelant",
-          phone: "Numéro de téléphone",
-          duration: "Durée (minutes)",
-          issue: "Description du problème"
-        },
-        button: "Enregistrer l'appel",
-        confirmation: "📞 L’appel de ",
-        logged: " a été enregistré avec succès !"
-      },
-      el: {
-        title: "Demo Καταγραφής Κλήσεων",
-        labels: {
-          name: "Όνομα ή αριθμός κλήσης",
-          phone: "Τηλέφωνο",
-          duration: "Διάρκεια (λεπτά)",
-          issue: "Περιγραφή προβλήματος"
-        },
-        button: "Καταγραφή Κλήσης",
-        confirmation: "📞 Η κλήση του/της ",
-        logged: " καταγράφηκε επιτυχώς!"
+<section id="export" class="tab">
+  <h2>📤 Export</h2>
+  <button onclick="exportToCSV(callData); showCsvHelp();">📄 Export to CSV</button>
+  <div id="csvHelp"></div>
+</section>
+
+<script>
+const callData = [
+  { Caller: "Γιάννης", Duration: "03:45", Type: "Εισερχόμενη", Issue: "Καθυστέρηση", Date: "2025-07-19" },
+  { Caller: "Marie", Duration: "01:12", Type: "Sortante", Issue: "Pas de réponse", Date: "2025-07-18" }
+];
+
+const translations = {
+  en: { help: "📄 Note: If using Excel, open CSV via Data → From Text/CSV and choose UTF-8." },
+  el: { help: "📄 Σημαντικό: Άνοιξε το CSV μέσω Δεδομένα → Από κείμενο/CSV και επίλεξε UTF-8." },
+  fr: { help: "📄 Important : Ouvrez le fichier via Données → À partir d’un texte/CSV et UTF-8." }
+};
+
+const chartLabels = {
+  en: ["Incoming", "Outgoing"],
+  el: ["Εισερχόμενη", "Εξερχόμενη"],
+  fr: ["Entrant", "Sortant"]
+};
+
+let currentLang = "en";
+
+function renderTable() {
+  const tbody = document.querySelector("#callTable tbody");
+  tbody.innerHTML = "";
+  callData.forEach((row, i) => {
+    tbody.innerHTML += `<tr>
+      <td>${row.Caller}</td>
+      <td>${row.Duration}</td>
+      <td>${row.Type}</td>
+      <td>${row.Issue}</td>
+      <td>${row.Date}</td>
+      <td>
+        <button onclick="editCall(${i})">✏️</button>
+        <button onclick="deleteCall(${i})">❌</button>
+      </td>
+    </tr>`;
+  });
+  updateChart();
+}
+
+function editCall(i) {
+  const entry = callData[i];
+  const name = prompt("Change name:", entry.Caller);
+  if (name) { entry.Caller = name; renderTable(); }
+}
+
+function deleteCall(i) {
+  if (confirm("Delete this call?")) {
+    callData.splice(i,1); renderTable();
+  }
+}
+
+function exportToCSV(data) {
+  if (!Array.isArray(data) || data.length === 0) return alert("No data to export.");
+  const headers = ["Caller","Duration","Type","Issue","Date"];
+  const rows = data.map(r => headers.map(h => `"${String(r[h]).normalize("NFC")}"`).join(","));
+  const today = new Date().toISOString().split("T")[0];
+  const csv = "\uFEFF" + [headers.join(","), ...rows].join("\n");
+  const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"});
+  const link = document.createElement("a");
+  link.setAttribute("href", URL.createObjectURL(blob));
+  link.setAttribute("download", `call_log_${today}.csv`);
+  document.body.appendChild(link); link.click(); document.body.removeChild(link);
+}
+
+function showCsvHelp() {
+  document.getElementById("csvHelp").innerHTML = translations[currentLang].help;
+  document.getElementById("csvHelp").style.display = "block";
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  html.setAttribute("data-theme", html.getAttribute("data-theme") === "dark" ? "light" : "dark");
+}
+
+function setLanguage(lang) {
+  currentLang = lang;
+  showCsvHelp();
+  updateChart();
+}
+
+function showTab(id) {
+  document.querySelectorAll(".tab").forEach(el => el.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+let myChart;
+function updateChart() {
+  const labels = chartLabels[currentLang];
+  const counts = { incoming: 0, outgoing: 0 };
+  callData.forEach(c => {
+    if (c.Type.includes("Εισερχ") || c.Type.includes("Incoming") || c.Type.includes("Entr")) counts.incoming++;
+    else counts.outgoing++;
+  });
+  const data = [counts.incoming, counts.outgoing];
+  if (myChart) {
+    myChart.data.labels = labels;
+    myChart.data.datasets[0].data = data;
+    myChart.update();
+  } else {
+    const ctx = document.getElementById("callChart").getContext("2d");
+    myChart = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: ["#38d9a9", "#ff6b6b"]
+        }]
       }
-    };
+    });
+  }
+}
 
-    let currentLang = "el";
-    let logData = [];
-
-    function updateLanguage(lang) {
-      currentLang = lang;
-      const t = translations[lang];
-      document.getElementById("title").innerText = t.title;
-      document.getElementById("labelName").innerText = t.labels.name;
-      document.getElementById("labelPhone").innerText = t.labels.phone;
-      document.getElementById("labelDuration").innerText = t.labels.duration;
-      document.getElementById("labelIssue").innerText = t.labels.issue;
-      document.getElementById("logBtn").innerText = t.button;
-    }
-
-    function logCall() {
-      const t = translations[currentLang];
-      const name = document.getElementById("nameInput").value;
-      const phone = document.getElementById("phoneInput").value;
-      const duration = document.getElementById("durationInput").value;
-      const issue = document.getElementById("issueInput").value;
-
-      if (name && phone && duration) {
-        document.getElementById("confirmationMsg").innerText = t.confirmation + name + t.logged;
-        const table = document.getElementById("logTable").querySelector("tbody");
-        const row = table.insertRow();
-        [name, phone, duration, issue].forEach(val => {
-          const cell = row.insertCell();
-          cell.innerText = val;
-        });
-        logData.push({ name, phone, duration, issue });
-        clearFields();
-      } else {
-        document.getElementById("confirmationMsg").innerText = "⚠️ Please fill all required fields.";
-      }
-    }
-
-    function clearFields() {
-      ["nameInput", "phoneInput", "durationInput", "issueInput"].forEach(id => {
-        document.getElementById(id).value = "";
-      });
-    }
-
-    function toggleDarkMode() {
-      document.body.classList.toggle("dark");
-    }
-
-    function downloadLog() {
-      let content = "Call Log Entries\n\n";
-      logData.forEach((log, i) => {
-        content += `#${i + 1}\nName: ${log.name}\nPhone: ${log.phone}\nDuration: ${log.duration}\nIssue: ${log.issue}\n\n`;
-      });
-      const blob = new Blob([content], { type: "text/plain" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "call_log.txt";
-      link.click();
-    }
-
-    document.getElementById("logBtn").addEventListener("click", logCall);
-    document.getElementById("langSelector").addEventListener("change", e => updateLanguage(e.target.value));
-    updateLanguage("el");
-  </script>
-
+window.onload = () => renderTable();
+</script>
 </body>
 </html>
