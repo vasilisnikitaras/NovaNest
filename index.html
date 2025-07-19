@@ -213,6 +213,15 @@
   <p>© 2025 NovaNest. Crafted in collaboration with <strong>Vasilis Nikitaras</strong>. All rights reserved.</p>
 </footer>
 
+
+<script>
+const callData = [
+  { Caller: "Γιάννης", Duration: "03:45", Type: "Εισερχόμενη", Issue: "Καθυστέρηση", Date: "2025-07-19" },
+  { Caller: "Marie", Duration: "01:12", Type: "Sortante", Issue: "Pas de réponse", Date: "2025-07-18" }
+];
+</script>
+  
+
 <script>
   function exportToCSV(data) {
     const headers = ["Caller", "Duration", "Type", "Issue", "Date"];
@@ -230,7 +239,8 @@
     document.body.removeChild(link);
   }
 </script>
-
+  
+<!--
   <script>
     function showCsvHelp() {
   document.getElementById("csvHelp").style.display = "block";
@@ -238,6 +248,9 @@
 
   </script>
 
+-->
+
+  
   <script>
   function showCsvHelp() {
     const lang = document.querySelector("select").value;
@@ -256,6 +269,14 @@
     box.style.display = "block";
   }
 </script>
+
+  <script>
+    if (!Array.isArray(data) || data.length === 0) {
+  alert("Δεν υπάρχουν δεδομένα προς εξαγωγή.");
+  return;
+}
+
+  </script>
 
   
 </body>
