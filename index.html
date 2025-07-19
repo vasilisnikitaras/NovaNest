@@ -149,6 +149,14 @@
   </div>
 </section>
 
+<table id="callTable" style="width:100%; margin-top:2rem; border-collapse: collapse;">
+  <thead style="background-color:#eee;">
+    <tr>
+      <th>Caller</th><th>Duration</th><th>Type</th><th>Issue</th><th>Date</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
 
   <button class="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
 
@@ -240,7 +248,10 @@ const callData = [
   const link = document.createElement("a");
 
   link.setAttribute("href", url);
-  link.setAttribute("download", "call_log.csv");
+  <!-- link.setAttribute("download", "call_log.csv"); -->
+const today = new Date().toISOString().split("T")[0]; // yyyy-mm-dd
+link.setAttribute("download", `call_log_${today}.csv`);
+
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -317,6 +328,68 @@ const callData = [
 }
 
   </script>
+
+<script>
+  function renderTable() {
+  const tbody = document.querySelector("#callTable tbody");
+  tbody.innerHTML = "";
+
+  callData.forEach((row, index) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${row.Caller}</td>
+      <td>${row.Duration}</td>
+      <td>${row.Type}</td>
+      <td>${row.Issue}</td>
+      <td>${row.Date}</td>
+      <td>
+        <button onclick="editCall(${index})">✏️</button>
+        <button onclick="deleteCall(${index})">❌</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+</script>
+
+
+  <script>
+    function deleteCall(index) {
+  if (confirm("Θες σίγουρα να διαγράψεις αυτή την κλήση;")) {
+    callData.splice(index, 1);
+    renderTable();
+  }
+}
+
+function editCall(index) {
+  const entry = callData[index];
+  const newCaller = prompt("Αλλαγή ονόματος:", entry.Caller);
+  if (newCaller !== null) {
+    entry.Caller = newCaller;
+    renderTable();
+  }
+}
+
+    
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
 </body>
