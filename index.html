@@ -370,28 +370,30 @@ function editCall(index) {
     renderTable();
   }
 }
-
-    
+  
   </script>
 
+  <script>
+    const chartLabels = {
+  en: ["Incoming", "Outgoing"],
+  el: ["Εισερχόμενη", "Εξερχόμενη"],
+  fr: ["Entrant", "Sortant"]
+};
 
+function updateChartLanguage(lang) {
+  myChart.data.labels = chartLabels[lang];
+  myChart.update();
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  </script>
   
+  <script>
+    window.onload = () => {
+  callData.length = 0; // καθαρίζει τις προηγούμενες εγγραφές
+  renderTable();       // εμφανίζει κενό πίνακα
+};
+
+  </script>
 </body>
 </html>
 
