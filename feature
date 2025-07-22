@@ -4,6 +4,220 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Features -VasiFanesNikitarasTechIdeas</title>
+
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --accent: #0055aa;
+    --button-bg: #eeeeee;
+    --button-text: #111;
+  }
+
+  [data-theme="dark"] {
+    --bg: #121212;
+    --text: #eeeeee;
+    --accent: #00ffff;
+    --button-bg: #333;
+    --button-text: #fff;
+  }
+
+  body {
+    margin: 0;
+    font-family: sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  header {
+    background: var(--accent);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav a, nav button {
+    background: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  section {
+    max-width: 800px;
+    margin: auto;
+    padding: 2rem;
+    animation: fadeIn 0.8s ease-in-out;
+  }
+
+  .feature-box {
+    background: var(--button-bg);
+    color: var(--button-text);
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 99;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg);
+    border: 2px solid var(--accent);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .modal.show {
+    display: block;
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background: var(--accent);
+    color: white;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .mobile-preview {
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 1rem;
+    background: var(--button-bg);
+    text-align: center;
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  ul {
+    padding-left: 0;
+    list-style-position: inside;
+  }
+
+  footer {
+    padding: 1rem;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  .back-techideas-button {
+    display: inline-block;
+    background-color: #2c2f38;
+    color: #ffffff;
+    padding: 10px 18px;
+    text-decoration: none;
+    border-radius: 6px;
+    margin: 20px 0;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+
+  .back-techideas-button:hover {
+    background-color: #444654;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    section {
+      padding: 1.2rem;
+    }
+
+    .feature-box {
+      padding: 1.2rem;
+      font-size: 1rem;
+    }
+
+    h1 {
+      font-size: 1.7rem;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    nav {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    nav a, nav button {
+      width: 100%;
+    }
+
+    .back-to-top {
+      bottom: 0.8rem;
+      right: 0.8rem;
+      font-size: 1rem;
+      padding: 0.6rem;
+    }
+
+    footer {
+      font-size: 0.8rem;
+      padding: 0.8rem;
+      text-align: center;
+    }
+
+    .mobile-preview {
+      width: 100%;
+      font-size: 0.95rem;
+    }
+  }
+</style>
+
+
+
+
+
+
+
+
+<!--  
   <style>
     :root {
       --bg: #ffffff;
@@ -278,7 +492,7 @@
   background-color: #444654;
 }
 </style>
-     
+     -->
 </head>
 <body>
   <header>
