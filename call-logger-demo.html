@@ -1,202 +1,299 @@
+
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="el">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Call Logger Demo</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📞 Call Logger Showcase | VasiVerse</title> 
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      margin: 0; font-family: sans-serif;
-      background: var(--bg); color: var(--text);
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fdfdfd;
+      color: #333;
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
     }
-    :root { --bg: #f8f8f8; --text: #222; --accent: #003366; }
-    [data-theme="dark"] { --bg: #121212; --text: #eee; --accent: #00ffff; }
-    nav { display: flex; gap: 1rem; padding: 1rem; background: var(--accent); color: white; justify-content: space-between; }
-    button, select { padding: 0.5rem 1rem; border: none; cursor: pointer; border-radius: 4px; }
-    section { padding: 1rem; max-width: 900px; margin: auto; }
-    .tab { display: none; }
-    .active { display: block; }
-    #callTable td, #callTable th { padding: 0.5rem; border: 1px solid #ccc; }
-    #csvHelp { margin-top: 1rem; padding: 1rem; background: #f1fdf8; border-left: 4px solid #38d9a9; display: none; }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    iframe {
+      width: 100%;
+      height: 620px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: #777;
+    }
   </style>
-
-
-<style>
-   .back-techideas-button {
-  display: inline-block;
-  background-color: #2c2f38;
-  color: #ffffff;
-  padding: 10px 18px;
-  text-decoration: none;
-  border-radius: 6px;
-  margin: 20px 0;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
+  
+   <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+      margin: 0;
+      scroll-behavior: smooth;
+    }
+    h2 {
+      text-align: center;
+    }
+    .comment-box {
+      margin-bottom: 20px;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      font-size: 16px;
+      padding: 10px;
+    }
+    button {
+      margin: 5px;
+      padding: 8px 14px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .history-log {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .history-entry {
+      margin: 5px 0;
+      padding: 5px;
+      border-bottom: 1px solid #eee;
+    }
+    .timestamp {
+      font-size: 12px;
+      color: #888;
+    }
+    .restore {
+      color: #28a745;
+      cursor: pointer;
+      margin-left: 10px;
+      font-size: 0.9rem;
+    }
+    #topButton {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 16px;
+      font-size: 16px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      display: none;
+      cursor: pointer;
+    }
+	
+	
+	<style>
+    #topButton:hover {
+      background-color: #218838;
+    }
+  </style>
+ 
+ 
+ <style>
+ #csvHelp {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #777;
+    border-left: 4px solid #38d9a9;
+    display: none;
 }
-
-.back-techideas-button:hover {
-  background-color: #444654;
-}
-</style>
-
+ 
+ </style>
+ 
 </head>
 <body>
+  <h1>📞 Call Logger Showcase</h1>
+  <p>Το επίσημο demo utility του VasiVerse με multilingual υποστήριξη, dark mode & export!</p>
 
-<nav>
-  <div>
-    <button onclick="toggleTheme()">Toggle Theme 🌗</button>
-    <select onchange="setLanguage(this.value)">
-      <option value="en">English</option>
-      <option value="el">Ελληνικά</option> 
-      <option value="fr">Français</option>
+  <iframe src="https://vasilisnikitaras.github.io/VasiFanesNikitarasTechIdeas/call-logger-demo.html" loading="lazy" allowfullscreen></iframe>
+
+	<!-- <iframe src="https://vasilisnikitaras.github.io/http://temp.vasiverse.com/call-logger-demo.html" loading="lazy" allowfullscreen></iframe> -->
+
+	<!--  http://temp.vasiverse.com/ -->
+
+<h2>📞 Call Logger με Σχόλια</h2>
+
+  <div style="margin-bottom:10px;">
+    <label for="callerSelect">Caller:</label>
+    <select id="callerSelect">
+      <option value="John Doe">John Doe</option>
+      <option value="Acme Support">Acme Support</option>
+      <option value="Client 394">Client 394</option>
     </select>
   </div>
-  <div>
-    <button onclick="showTab('log')">📞 Log</button>
-    <button onclick="showTab('stats')">📊 Stats</button>
-    <button onclick="showTab('export')">📤 Export</button>
+
+  <div class="comment-box">
+    <textarea id="commentInput" placeholder="Γράψε σχόλιο εδώ..." autofocus></textarea>
+    <button onclick="logComment()">Καταγραφή</button>
+    <button onclick="exportLogs()">📤 Export Logs</button>
   </div>
-</nav>
 
-<a href="https://vasilisnikitaras.github.io/VasiFanesNikitarasTechIdeas/" class="back-techideas-button">
-  🔙 Back to Tech Ideas Home
-</a>
+  <div class="history-log">
+    <h3>📜 Ιστορικό Σχολίων</h3>
+    <div id="commentHistory"></div>
+  </div>
 
-<section id="log" class="tab active">
-  <h2>📞 Call Log</h2>
-  <textarea id="callComment" placeholder="✍️ Add comment..." style="width:100%; margin-bottom:1rem;"></textarea>
-  <table id="callTable" style="width:100%; border-collapse:collapse;">
-    <thead><tr><th>Caller</th><th>Duration</th><th>Type</th><th>Issue</th><th>Date</th><th>Actions</th></tr></thead>
-    <tbody></tbody>
-  </table>
-</section>
+ <!-- <button onclick="scrollToTop()" id="topButton">⬆️ Climb to Top</button> -->
 
-<section id="stats" class="tab">
-  <h2>📊 Stats</h2>
-  <canvas id="callChart" width="400" height="200"></canvas>
-</section>
 
-<section id="export" class="tab">
-  <h2>📤 Export</h2>
-  <button onclick="exportToCSV(callData); showCsvHelp();">📄 Export to CSV</button>
-  <div id="csvHelp"></div>
-</section>
 
 <script>
-const callData = [
-  { Caller: "Billy", Duration: "03:45", Type: "Εισερχόμενη", Issue: "Καθυστέρηση", Date: "2025-07-19" },
-  { Caller: "Rosie", Duration: "01:12", Type: "Sortante", Issue: "Pas de réponse", Date: "2025-07-18" }
-];
+  document.addEventListener('DOMContentLoaded', () => {
+  const mockCalls = [
+    {
+      date: '2025-07-19',
+      time: '14:35',
+      caller: 'John Doe',
+      notes: 'Requested callback.',
+      comment: 'Follow-up scheduled.'
+    },
+    {
+      date: '2025-07-19',
+      time: '15:10',
+      caller: 'Acme Support',
+      notes: 'Zone 3 outage.',
+      comment: ''
+    }
+  ];
+  renderCallLog(mockCalls); // Hook this into your table-rendering logic
+});
 
-const translations = {
-  en: { help: "📄 Note: If using Excel, open CSV via Data → From Text/CSV and choose UTF-8." },
-  el: { help: "📄 Σημαντικό: Άνοιξε το CSV μέσω Δεδομένα → Από κείμενο/CSV και επίλεξε UTF-8." },
-  fr: { help: "📄 Important : Ouvrez le fichier via Données → À partir d’un texte/CSV et UTF-8." }
-};
-
-const chartLabels = {
-  en: ["Incoming", "Outgoing"],
-  el: ["Εισερχόμενη", "Εξερχόμενη"],
-  fr: ["Entrant", "Sortant"]
-};
-
-let currentLang = "en";
-
-function renderTable() {
-  const tbody = document.querySelector("#callTable tbody");
-  tbody.innerHTML = "";
-  callData.forEach((row, i) => {
-    tbody.innerHTML += `<tr>
-      <td>${row.Caller}</td>
-      <td>${row.Duration}</td>
-      <td>${row.Type}</td>
-      <td>${row.Issue}</td>
-      <td>${row.Date}</td>
-      <td>
-        <button onclick="editCall(${i})">✏️</button>
-        <button onclick="deleteCall(${i})">❌</button>
-      </td>
-    </tr>`;
-  });
-  updateChart();
-}
-
-function editCall(i) {
-  const entry = callData[i];
-  const name = prompt("Change name:", entry.Caller);
-  if (name) { entry.Caller = name; renderTable(); }
-}
-
-function deleteCall(i) {
-  if (confirm("Delete this call?")) {
-    callData.splice(i,1); renderTable();
-  }
-}
-
-function exportToCSV(data) {
-  if (!Array.isArray(data) || data.length === 0) return alert("No data to export.");
-  const headers = ["Caller","Duration","Type","Issue","Date"];
-  const rows = data.map(r => headers.map(h => `"${String(r[h]).normalize("NFC")}"`).join(","));
-  const today = new Date().toISOString().split("T")[0];
-  const csv = "\uFEFF" + [headers.join(","), ...rows].join("\n");
-  const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"});
-  const link = document.createElement("a");
-  link.setAttribute("href", URL.createObjectURL(blob));
-  link.setAttribute("download", `call_log_${today}.csv`);
-  document.body.appendChild(link); link.click(); document.body.removeChild(link);
-}
-
-function showCsvHelp() {
-  document.getElementById("csvHelp").innerHTML = translations[currentLang].help;
-  document.getElementById("csvHelp").style.display = "block";
-}
-
-function toggleTheme() {
-  const html = document.documentElement;
-  html.setAttribute("data-theme", html.getAttribute("data-theme") === "dark" ? "light" : "dark");
-}
-
-function setLanguage(lang) {
-  currentLang = lang;
-  showCsvHelp();
-  updateChart();
-}
-
-function showTab(id) {
-  document.querySelectorAll(".tab").forEach(el => el.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-}
-
-let myChart;
-function updateChart() {
-  const labels = chartLabels[currentLang];
-  const counts = { incoming: 0, outgoing: 0 };
-  callData.forEach(c => {
-    if (c.Type.includes("Εισερχ") || c.Type.includes("Incoming") || c.Type.includes("Entr")) counts.incoming++;
-    else counts.outgoing++;
-  });
-  const data = [counts.incoming, counts.outgoing];
-  if (myChart) {
-    myChart.data.labels = labels;
-    myChart.data.datasets[0].data = data;
-    myChart.update();
-  } else {
-    const ctx = document.getElementById("callChart").getContext("2d");
-    myChart = new Chart(ctx, {
-      type: "pie",
-      data: {
-        labels: labels,
-        datasets: [{
-          data: data,
-          backgroundColor: ["#38d9a9", "#ff6b6b"]
-        }]
-      }
-    });
-  }
-}
-
-window.onload = () => renderTable();
 </script>
+
+<script>
+  function smartSearch(query, calls) {
+  const q = query.toLowerCase();
+  return calls.filter(call =>
+    Object.values(call).some(value =>
+      String(value).toLowerCase().includes(q)
+    )
+  );
+}
+
+</script>
+
+<script>
+  function clearComment(callId) {
+    const call = callLog.find(c => c.id === callId);
+    if (call) {
+      call.comment = '_Comment removed_';
+      showToast('Comment cleared ✅');
+      updateCallDisplay();
+    }
+  }
+
+  function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2000);
+  }
+</script>
+
+
+<script>
+    const commentInput = document.getElementById("commentInput");
+    const commentHistory = document.getElementById("commentHistory");
+    const topButton = document.getElementById("topButton");
+    const callerSelect = document.getElementById("callerSelect");
+
+    let snapshots = [];
+
+    function logComment() {
+      const text = commentInput.value.trim();
+      const caller = callerSelect.value;
+      if (text) {
+        const time = new Date().toLocaleTimeString();
+        snapshots.push({ text, time, caller });
+        updateHistory();
+        commentInput.value = "";
+        commentInput.focus();
+      }
+    }
+
+    function updateHistory() {
+      commentHistory.innerHTML = "";
+      snapshots.slice(-30).forEach((entry, idx) => {
+        const div = document.createElement("div");
+        div.className = "history-entry";
+        div.innerHTML = `
+          <div class="timestamp">[${entry.time}] — <strong>${entry.caller}</strong></div>
+          <div>${entry.text}
+            <span class="restore" onclick="restore(${idx})">↩ Restore</span>
+          </div>`;
+        commentHistory.appendChild(div);
+      });
+    }
+
+    function restore(index) {
+      const entry = snapshots[index];
+      if (entry) {
+        commentInput.value = entry.text;
+        callerSelect.value = entry.caller;
+        commentInput.focus();
+      }
+    }
+
+    function exportLogs() {
+      const data = JSON.stringify(snapshots, null, 2);
+      const blob = new Blob([data], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "comment-log.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    window.onscroll = () => {
+      topButton.style.display = window.scrollY > 200 ? "block" : "none";
+    };
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      commentInput.focus();
+      window.scrollTo({ top: 0, behavior: "instant" });
+    });
+  </script>
+
+
+  <footer>
+    Created by Vasileios Nikitaras & Copilot 🤝 | © 2025 — All Rights Reserved
+  </footer>
+
+   <button onclick="scrollToTop()" id="topButton">⬆️ Climb to Top</button>
+	
 </body>
 </html>
