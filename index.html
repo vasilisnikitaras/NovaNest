@@ -263,34 +263,7 @@ link.setAttribute("download", `call_log_${today}.csv`);
 
 </script>
   
-<!--
 
-<script>
-  function exportToCSV(data) {
-    const headers = ["Caller", "Duration", "Type", "Issue", "Date"];
-    const rows = data.map(row => headers.map(h => `"${row[h]}"`).join(","));
-    const csvContent = "\uFEFF" + [headers.join(","), ...rows].join("\n"); // 👈 BOM για σωστό UTF-8!
-
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-
-    link.setAttribute("href", url);
-    link.setAttribute("download", "call_log.csv");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
-</script>
-  
-  <script>
-    function showCsvHelp() {
-  document.getElementById("csvHelp").style.display = "block";
-}
-
-  </script>
-
--->
 
   
   <script>
